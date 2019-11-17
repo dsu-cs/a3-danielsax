@@ -3,6 +3,7 @@
 // include this library to use NULL, otherwise use nullptr instead
 #include <cstddef>
 #include <iostream>
+#include <vector>
 #include "node.hpp"
 
 template<class T>
@@ -155,5 +156,5 @@ void BST<T>::printVec(std::vector<T> *head)
         std::cout << head->back() << " ";
         head->pop_back();
     }
-    std::cout << endl;
+    std::cout << std::endl;
 }
