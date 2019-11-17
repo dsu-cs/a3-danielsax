@@ -35,11 +35,15 @@ public:
     // Gets the current number of nodes in the tree
     // returns: the number of nodes in the tree
     int get_size(void);
+
+    void printVec(std::vector<T> *);
 private:
     // the root node of the tree
     Node<T> *root;
     // the number of nodes in the tree
     int node_count;
+    Node<T> *insertHelper(T, Node<T> *)
+    std::vector<T> *inorderHelper(Node<T> *);
 };
 
 template<class T>
@@ -63,10 +67,20 @@ template<class T>
  std::vector<T> * BST<T>::inorder()
 {
     std::vector<T> *vec = new std::vector<T>;
-
+    vec = insertHelper(root, vec);
     return vec;
 }
 
+template<class T>
+ std::vector<T> * BST<T>::inorderHelper(Node<T> *sub_root, std::vector<T> *head)
+{
+    std::vector<T> *vec = new std::vector<T>;
+    if (sub_root != NULL) {
+        
+    }
+
+    return vec;
+}
 
 template<class T>
  std::vector<T> * BST<T>::preorder()
@@ -87,7 +101,28 @@ template<class T>
 template<class T>
 void BST<T>::insert(T new_data)
 {
+    root = BST<T>::insertHelper(new_data, root);
+}
 
+template<class T>
+Node<T> * BST<T>::insertHelper(T new_data, Node<T> *sub_root)
+{
+    if (sub_root == NULL) {
+        Node<T> *new_node = new Node<T>(new_data);
+        sub_root = new_node;
+        count++;
+        return 
+    }
+    else if (sub_root->get_data() == new_data) {
+        return NULL;
+    }
+    else if (new_data < sub_root->get_data()) {
+        insertHelper(new_data, sub_root->get_left())
+    }
+    else {
+        insertHelper(new_data, sub_root->get_right())
+    }
+    return 0;
 }
 
 
@@ -111,4 +146,13 @@ template<class T>
 int BST<T>::get_size()
 {
 
+}
+
+void BST<T>::printVec(std::vector<T> *head)
+{
+    while (!head->empty()) {
+        std::cout << head->back() << " ";
+        head->pop_back();
+    }
+    std::cout << endl;
 }
