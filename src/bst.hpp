@@ -110,17 +110,17 @@ Node<T> * BST<T>::insertHelper(T new_data, Node<T> *sub_root)
     if (sub_root == NULL) {
         Node<T> *new_node = new Node<T>(new_data);
         sub_root = new_node;
-        count++;
-        return 
+        node_count++;
+        return sub_root;
     }
     else if (sub_root->get_data() == new_data) {
         return NULL;
     }
     else if (new_data < sub_root->get_data()) {
-        insertHelper(new_data, sub_root->get_left())
+        insertHelper(new_data, sub_root->get_left());
     }
     else {
-        insertHelper(new_data, sub_root->get_right())
+        insertHelper(new_data, sub_root->get_right());
     }
     return 0;
 }
