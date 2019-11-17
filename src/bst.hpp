@@ -148,6 +148,7 @@ int BST<T>::get_size()
 
 }
 
+template<class T>
 void BST<T>::printVec(std::vector<T> *head)
 {
     while (!head->empty()) {
