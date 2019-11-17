@@ -42,8 +42,8 @@ private:
     Node<T> *root;
     // the number of nodes in the tree
     int node_count;
-    Node<T> *insertHelper(T, Node<T> *)
-    std::vector<T> *inorderHelper(Node<T> *);
+    Node<T> *insertHelper(T, Node<T> *);
+    std::vector<T> *inorderHelper(Node<T> *, std::vector<T> *);
 };
 
 template<class T>
@@ -79,7 +79,7 @@ template<class T>
         head.push_back(sub_root->get_data());
         inorderHelper(sub_root->get_right(), head);
     }
-    return vec;
+    return head;
 }
 
 template<class T>
