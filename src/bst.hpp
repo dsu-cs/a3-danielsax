@@ -67,18 +67,18 @@ template<class T>
  std::vector<T> * BST<T>::inorder()
 {
     std::vector<T> *vec = new std::vector<T>;
-    vec = insertHelper(root, vec);
+    vec = inorderHelper(root, vec);
     return vec;
 }
 
 template<class T>
- std::vector<T> * BST<T>::inorderHelper(Node<T> *sub_root, std::vector<T> *head)
+ std::vector<T> * inorderHelper(Node<T> *sub_root, std::vector<T> *head)
 {
-    std::vector<T> *vec = new std::vector<T>;
     if (sub_root != NULL) {
-        
+        inorderHelper(sub_root->get_left(), head);
+        head.push_back(sub_root->get_data());
+        inorderHelper(sub_root->get_right(), head);
     }
-
     return vec;
 }
 
