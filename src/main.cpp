@@ -101,6 +101,9 @@ int main(int argc, char** argv)
             i = bst.get_size();
             cout << "The tree has " << i <<  "nodes\n";
             break;
+        case 8:
+            std::vector<int> *MyVec = bst.inorder();
+            bst.printVec(MyVec);
         }
 	}
 	input.close();
