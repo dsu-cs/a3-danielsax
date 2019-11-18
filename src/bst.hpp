@@ -42,6 +42,7 @@ private:
     Node<T> *root;
     // the number of nodes in the tree
     int node_count;
+
     Node<T> *insertHelper(T, Node<T> *);
     std::vector<T> *inorderHelper(Node<T> *, std::vector<T> *);
     std::vector<T> *preorderHelper(Node<T> *, std::vector<T> *);
@@ -67,7 +68,7 @@ BST<T>::~BST()
 }
 
 template<class T>
- std::vector<T> * BST<T>::inorder()
+ std::vector<T> * BST<T>::inorder()                     //Calls inorder helper func
 {
     std::vector<T> *vec = new std::vector<T>;
     BST<T>::inorderHelper(root, vec);
@@ -77,7 +78,7 @@ template<class T>
 template<class T>
  std::vector<T> * BST<T>::inorderHelper(Node<T> *sub_root, std::vector<T> *head)
 {
-    if (sub_root != NULL) {
+    if (sub_root != NULL) {                                     //Continues to call til base case
         inorderHelper(sub_root->get_left(), head);
         head->push_back(sub_root->get_data());
         inorderHelper(sub_root->get_right(), head);
@@ -86,7 +87,7 @@ template<class T>
 }
 
 template<class T>
- std::vector<T> * BST<T>::preorder()
+ std::vector<T> * BST<T>::preorder()                    //Calls preorder helper func
 {
     std::vector<T> *vec = new std::vector<T>;
     BST<T>::preorderHelper(root, vec);
@@ -96,7 +97,7 @@ template<class T>
 template<class T>
  std::vector<T> * BST<T>::preorderHelper(Node<T> *sub_root, std::vector<T> *head)
 {
-    if (sub_root != NULL) {
+    if (sub_root != NULL) {                                     //Continues to call til base case
         head->push_back(sub_root->get_data());
         preorderHelper(sub_root->get_left(), head);
         preorderHelper(sub_root->get_right(), head);
@@ -105,7 +106,7 @@ template<class T>
 }
 
 template<class T>
- std::vector<T> * BST<T>::postorder()
+ std::vector<T> * BST<T>::postorder()                   //Calls postorder helper func
 {
     std::vector<T> *vec = new std::vector<T>;
     BST<T>::postorderHelper(root, vec);
@@ -115,7 +116,7 @@ template<class T>
 template<class T>
  std::vector<T> * BST<T>::postorderHelper(Node<T> *sub_root, std::vector<T> *head)
 {
-    if (sub_root != NULL) {
+    if (sub_root != NULL) {                                     //Continues to call til base case
         postorderHelper(sub_root->get_left(), head);
         postorderHelper(sub_root->get_right(), head);
         head->push_back(sub_root->get_data());
@@ -124,7 +125,7 @@ template<class T>
 }
 
 template<class T>
-void BST<T>::insert(T new_data)
+void BST<T>::insert(T new_data)                                 //Calls helper func
 {
     root = BST<T>::insertHelper(new_data, root);
 }
@@ -132,19 +133,19 @@ void BST<T>::insert(T new_data)
 template<class T>
 Node<T> * BST<T>::insertHelper(T new_data, Node<T> *sub_root)
 {
-    if (sub_root == NULL) {
+    if (sub_root == NULL) {                                             //Base case
         Node<T> *new_node = new Node<T>(new_data);
         sub_root = new_node;
         node_count++;
         return sub_root;
     }
-    else if (sub_root->get_data() == new_data) {
+    else if (sub_root->get_data() == new_data) {                        //Handles duplicate case
         return sub_root;
     }
-    else if (new_data < sub_root->get_data()) {
+    else if (new_data < sub_root->get_data()) {                         //Handles lower case
         sub_root->set_left(insertHelper(new_data, sub_root->get_left()));
     }
-    else {
+    else {                                                              //Handles higher case
         sub_root->set_right(insertHelper(new_data, sub_root->get_right()));
     }
     return sub_root;
@@ -152,7 +153,7 @@ Node<T> * BST<T>::insertHelper(T new_data, Node<T> *sub_root)
 
 
 template<class T>
-Node<T> *BST<T>::search(T val)
+Node<T> *BST<T>::search(T val)                                          //Calls search helper
 {
     return BST<T>::searchHelper(val, root);
 }
@@ -160,16 +161,16 @@ Node<T> *BST<T>::search(T val)
 template<class T>
 Node<T> *BST<T>::searchHelper(T val, Node<T> *sub_root)
 {
-    if (sub_root == NULL) {
+    if (sub_root == NULL) {                                             //Handles empty list
         return NULL;
     }
-    else if (sub_root->get_data() == val) {
+    else if (sub_root->get_data() == val) {                             //Handles base case
         return sub_root;
     }
-    else if (val < sub_root->get_data()) {
+    else if (val < sub_root->get_data()) {                              //Handles lower case
         return BST<T>::searchHelper(val, sub_root->get_left());
     }
-    else if (val > sub_root->get_data()) {
+    else if (val > sub_root->get_data()) {                              //Handles higher case
         return BST<T>::searchHelper(val, sub_root->get_right());
     }
 }
@@ -236,6 +237,7 @@ void BST<T>::remove(T val)
                     delete(del);
                 }
             }
+            node_count--;
             return;
         }
         else if (val < del->get_data()) {                                   //searches left case
@@ -252,5 +254,5 @@ void BST<T>::remove(T val)
 template<class T>
 int BST<T>::get_size()
 {
-    return node_count;
+    return node_count;                          //returns count
 }
